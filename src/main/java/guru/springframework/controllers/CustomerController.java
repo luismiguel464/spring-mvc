@@ -19,12 +19,12 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @RequestMapping("/customers")
+    @RequestMapping("/customer/list")
     public String listOfCustomer(Model model) {
 
         model.addAttribute("customers", customerService.listAll());
 
-        return "customers";
+        return "customer/list";
     }
 
     @RequestMapping("/customer/{id}")
@@ -64,7 +64,7 @@ public class CustomerController {
 
         customerService.delete(id);
 
-        return "redirect:/customers";
+        return "redirect:/customer/list";
     }
 
 }

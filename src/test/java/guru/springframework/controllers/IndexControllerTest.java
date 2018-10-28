@@ -1,4 +1,4 @@
-package guru.springframework;
+package guru.springframework.controllers;
 
 import guru.springframework.controllers.IndexController;
 import org.junit.Before;
