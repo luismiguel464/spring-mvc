@@ -8,7 +8,7 @@ public class Customer implements DomainObject {
     private String email;
     private String phoneNumber;
     private String addressLineOne;
-    private String getAddressLineTwo;
+    private String addressLineTwo;
     private String city;
     private String state;
     private String zipCode;
@@ -63,12 +63,12 @@ public class Customer implements DomainObject {
         this.addressLineOne = addressLineOne;
     }
 
-    public String getGetAddressLineTwo() {
-        return getAddressLineTwo;
+    public String getAddressLineTwo() {
+        return addressLineTwo;
     }
 
-    public void setGetAddressLineTwo(String getAddressLineTwo) {
-        this.getAddressLineTwo = getAddressLineTwo;
+    public void setAddressLineTwo(String addressLineTwo) {
+        this.addressLineTwo = addressLineTwo;
     }
 
     public String getCity() {
