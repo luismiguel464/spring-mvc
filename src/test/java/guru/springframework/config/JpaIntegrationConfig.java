@@ -9,6 +9,4 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan("guru.springframework")
 public class JpaIntegrationConfig {
 
-
-
 }
