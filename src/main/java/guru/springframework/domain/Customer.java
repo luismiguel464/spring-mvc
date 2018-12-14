@@ -22,8 +22,7 @@ public class Customer implements DomainObject {
     private String state;
     private String zipCode;
 
-    @OneToOne (cascade = {CascadeType.ALL}) //Customer has relationship with User and to save both when
-                                    //User is set within the Customer object, Hibernate needs Cascade
+    @OneToOne //Removed Cascade because if customer is removed, I want to keep the related User information
     private User user;
 
     @Override

@@ -1,5 +1,7 @@
 package guru.springframework.domain;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 
 @Entity
@@ -20,6 +22,9 @@ public class User implements DomainObject {
     private String encryptedPassword;
 
     private boolean enabled = true;
+
+    @OneToOne (cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private Customer customer;
 
     @Override
     public Integer getId() {
@@ -69,5 +74,14 @@ public class User implements DomainObject {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+        this.customer.setUser(this);
     }
 }

@@ -1,6 +1,7 @@
 package guru.springframework.services;
 
 import guru.springframework.config.JpaIntegrationConfig;
+import guru.springframework.domain.Customer;
 import guru.springframework.domain.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,6 +37,28 @@ public class UserServiceJpaDaoImplTest {
 
         System.out.println("Encrypted Password");
         System.out.println(savedUser.getEncryptedPassword());
+
+    }
+
+    @Test
+    public void testSaveUserWithCustomer() {
+
+        User user = new User();
+        user.setUsername("user name");
+        user.setPassword("user password");
+
+        Customer customer = new Customer();
+        customer.setFirstName("customer first name");
+        customer.setLastName("customer last name");
+
+        user.setCustomer(customer);
+
+        User savedUser = userService.saveOrUpdate(user);
+
+        assert savedUser.getId() != null;
+        assert savedUser.getVersion() != null;
+        assert savedUser.getCustomer() != null;
+        assert savedUser.getCustomer().getId() != null;
 
     }
 
