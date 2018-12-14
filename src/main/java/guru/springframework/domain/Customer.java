@@ -22,6 +22,10 @@ public class Customer implements DomainObject {
     private String state;
     private String zipCode;
 
+    @OneToOne (cascade = {CascadeType.ALL}) //Customer has relationship with User and to save both when
+                                    //User is set within the Customer object, Hibernate needs Cascade
+    private User user;
+
     @Override
     public Integer getId() {
         return id;
@@ -110,5 +114,13 @@ public class Customer implements DomainObject {
 
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
