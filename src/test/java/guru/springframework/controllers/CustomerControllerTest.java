@@ -1,5 +1,6 @@
 package guru.springframework.controllers;
 
+import guru.springframework.domain.Address;
 import guru.springframework.domain.Customer;
 import guru.springframework.services.CustomerService;
 import org.junit.Before;
@@ -107,8 +108,9 @@ public class CustomerControllerTest {
 
         Customer returnCustomer = new Customer();
         returnCustomer.setId(id);
-        returnCustomer.setAddressLineOne(address);
-        returnCustomer.setCity(city);
+        returnCustomer.setBillingAddress(new Address());
+        returnCustomer.getBillingAddress().setAddressLine1(address);
+        returnCustomer.getBillingAddress().setCity(city);
         returnCustomer.setEmail(email);
         returnCustomer.setFirstName("First Name");
         returnCustomer.setLastName("Last Name");
@@ -135,9 +137,9 @@ public class CustomerControllerTest {
         verify(customerService).saveOrUpdate(boundCustomer.capture());
 
         assertEquals(id, boundCustomer.getValue().getId());
-        assertEquals(address, boundCustomer.getValue().getAddressLineOne());
+        assertEquals(address, boundCustomer.getValue().getBillingAddress().getAddressLine1());
         assertEquals(email, boundCustomer.getValue().getEmail());
-        assertEquals(city, boundCustomer.getValue().getCity());
+        assertEquals(city, boundCustomer.getValue().getBillingAddress().getCity());
 
     }
 

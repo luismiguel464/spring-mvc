@@ -45,6 +45,8 @@ public class ProductServiceJpaDaoImpl implements ProductService {
                                                     //properties of that object if it does exist.
         em.getTransaction().commit();
 
+        em.close();
+
         return savedProduct;
     }
 

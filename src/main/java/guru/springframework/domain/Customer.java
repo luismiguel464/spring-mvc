@@ -16,11 +16,27 @@ public class Customer implements DomainObject {
     private String lastName;
     private String email;
     private String phoneNumber;
-    private String addressLineOne;
-    private String addressLineTwo;
-    private String city;
-    private String state;
-    private String zipCode;
+
+    // This is needed for embedded entities when the have duplicated keys
+    @AttributeOverrides({
+            @AttributeOverride(name = "addressLine1", column = @Column(name = "billing_addressLine1")),
+            @AttributeOverride(name = "addressLine2", column = @Column(name = "billing_addressLine2")),
+            @AttributeOverride(name = "city", column = @Column(name = "billing_city")),
+            @AttributeOverride(name = "state", column = @Column(name = "billing_state")),
+            @AttributeOverride(name = "zipCode", column = @Column(name = "billing_zipCode"))
+    })
+    @Embedded
+    private Address billingAddress;
+
+    @AttributeOverrides({
+            @AttributeOverride(name = "addressLine1", column = @Column(name = "shipping_addressLine1")),
+            @AttributeOverride(name = "addressLine2", column = @Column(name = "shipping_addressLine2")),
+            @AttributeOverride(name = "city", column = @Column(name = "shipping_city")),
+            @AttributeOverride(name = "state", column = @Column(name = "shipping_state")),
+            @AttributeOverride(name = "zipCode", column = @Column(name = "shipping_zipCode"))
+    })
+    @Embedded
+    private Address shippingAddress;
 
     @OneToOne //Removed Cascade because if customer is removed, I want to keep the related User information
     private User user;
@@ -75,44 +91,20 @@ public class Customer implements DomainObject {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getAddressLineOne() {
-        return addressLineOne;
+    public Address getBillingAddress() {
+        return billingAddress;
     }
 
-    public void setAddressLineOne(String addressLineOne) {
-        this.addressLineOne = addressLineOne;
+    public void setBillingAddress(Address billingAddress) {
+        this.billingAddress = billingAddress;
     }
 
-    public String getAddressLineTwo() {
-        return addressLineTwo;
+    public Address getShippingAddress() {
+        return shippingAddress;
     }
 
-    public void setAddressLineTwo(String addressLineTwo) {
-        this.addressLineTwo = addressLineTwo;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getZipCode() {
-        return zipCode;
-    }
-
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
+    public void setShippingAddress(Address shippingAddress) {
+        this.shippingAddress = shippingAddress;
     }
 
     public User getUser() {

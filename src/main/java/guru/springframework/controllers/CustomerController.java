@@ -27,12 +27,12 @@ public class CustomerController {
         return "customer/list";
     }
 
-    @RequestMapping("/customer/{id}")
+    @RequestMapping("/customer/show/{id}")
     public String getCustomer(@PathVariable Integer id, Model model) {
 
         model.addAttribute("customer", customerService.getById(id));
 
-        return "/customer";
+        return "customer/show";
     }
 
     @RequestMapping("/customer/new")
@@ -40,7 +40,7 @@ public class CustomerController {
 
         model.addAttribute("customer", new Customer());
 
-        return "/customerForm";
+        return "customer/customerForm";
     }
 
     @RequestMapping(value = "/customer", method = RequestMethod.POST)
@@ -48,15 +48,15 @@ public class CustomerController {
 
         Customer savedCustomer = customerService.saveOrUpdate(customer);
 
-        return "redirect:/customer/" + savedCustomer.getId();
+        return "redirect:/customer/show" + savedCustomer.getId();
     }
 
-    @RequestMapping("/customer/edit/{id}")
+    @RequestMapping("customer/edit/{id}")
     public String edit(@PathVariable Integer id, Model model) {
 
         model.addAttribute("customer", customerService.getById(id));
 
-        return "customerForm";
+        return "customer/customerForm";
     }
 
     @RequestMapping("/customer/delete/{id}")

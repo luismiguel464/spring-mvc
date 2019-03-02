@@ -1,34 +1,26 @@
 package guru.springframework.domain;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
-public class CartDetail implements DomainObject {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+public class OrderDetail extends AbstractDomainClass {
 
     @ManyToOne
-    private Cart cart;
+    private Order order;
 
     @OneToOne
     private Product product;
 
     private Integer quantity;
 
-    @Override
-    public Integer getId() {
-        return id;
+    public Order getOrder() {
+        return order;
     }
 
-    @Override
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public void setCart(Cart cart) {
-        this.cart = cart;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     public Product getProduct() {

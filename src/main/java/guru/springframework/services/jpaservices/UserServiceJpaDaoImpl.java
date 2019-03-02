@@ -52,6 +52,8 @@ public class UserServiceJpaDaoImpl extends AbstractJpaDaoService implements User
 
         em.getTransaction().commit();
 
+        em.close();
+
         return savedUser;
     }
 
